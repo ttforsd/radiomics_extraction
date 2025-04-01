@@ -148,5 +148,12 @@ class Extractor:
 
 
 if __name__ == "__main__":
+    # get argv 
+    num_workers = sys.argv[1]
+    batch_size = sys.argv[2]
+    if num_workers is not None:
+        num_workers = int(num_workers)
+    if batch_size is not None:
+        batch_size = int(batch_size)
     ext = Extractor(workers=2, batch_size=10)
     ext.main()
