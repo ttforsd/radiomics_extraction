@@ -100,7 +100,7 @@ class Extractor:
 
     def parallel_feature_extraction(self, pairs):
         res_arr = [] 
-        pairs = pairs[:4]
+        pairs = pairs
         num_pairs = len(pairs)
         with Pool(self.workers) as pool:
             for i in range(0, num_pairs, self.batch_size):
