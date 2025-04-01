@@ -155,5 +155,5 @@ if __name__ == "__main__":
         num_workers = int(num_workers)
     if batch_size is not None:
         batch_size = int(batch_size)
-    ext = Extractor(workers=2, batch_size=10)
+    ext = Extractor(workers=num_workers, batch_size=batch_size)
     ext.main()
