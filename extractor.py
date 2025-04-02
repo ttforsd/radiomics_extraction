@@ -10,7 +10,7 @@ import numpy as np
 
 
 class Extractor:
-    def __init__(self, workers = 10, batch_size = 10):
+    def __init__(self, workers = 3, batch_size = 1000):
         self.extract = None  
         self.workers = workers
         self.batch_size = batch_size
@@ -22,6 +22,7 @@ class Extractor:
         self.load_config("data.yaml")
         self.enable_LoG()
         self.enable_wavelet()
+        self.enable_other_img_types()
         self.get_pairs()
 
 
@@ -75,6 +76,21 @@ class Extractor:
             self.load_extractor()
         self.extract.enableImageTypeByName("LoG", customArgs=param)
 
+    def enable_other_img_types(self): 
+        if not self.extract:
+            self.load_extractor()
+        self.extract.enableImageTypeByName("Square")
+        self.extract.enableImageTypeByName("SquareRoot")
+        self.extract.enableImageTypeByName("Logarithm")
+        self.extract.enableImageTypeByName("Exponential")
+        self.extract.enableImageTypeByName("Gradient")
+        self.extract.enableImageTypeByName("LBP2D")
+        self.extract.enableImageTypeByName("LBP3D")
+
+
+
+        
+
     def worker(self, scan, seg):
         # print time taken to process each pair
         start = time.time() 
@@ -83,9 +99,9 @@ class Extractor:
             self.load_extractor()
         features = self.extract.execute(scan, seg)
         end = time.time() 
-        print(f"Processed {scan} and {seg} in {end - start} seconds")
         current_time = time.strftime('%l:%M%p %z on %b %d, %Y')
-        print(f"Current time: {current_time}")
+        print(f"{current_time} | Processed {scan} and {seg} in {end - start} seconds")
+
         return seg, features
 
     def parse_output(self, seg, features):
