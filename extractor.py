@@ -3,7 +3,7 @@ import yaml
 import os
 import pandas as pd
 from multiprocessing import Pool
-from time import time
+import time 
 import sys 
 from collections import defaultdict
 import numpy as np
@@ -77,12 +77,12 @@ class Extractor:
 
     def worker(self, scan, seg):
         # print time taken to process each pair
-        start = time()
+        start = time.time() 
         print(f"Extracting feactures from {scan} and {seg}")
         if not self.extract:
             self.load_extractor()
         features = self.extract.execute(scan, seg)
-        end = time()
+        end = time.time() 
         print(f"Processed {scan} and {seg} in {end - start} seconds")
         current_time = time.strftime('%l:%M%p %z on %b %d, %Y')
         print(f"Current time: {current_time}")
