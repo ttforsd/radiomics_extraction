@@ -83,9 +83,9 @@ class Extractor:
             self.load_extractor()
         features = self.extract.execute(scan, seg)
         end = time.time() 
-        print(f"Processed {scan} and {seg} in {end - start} seconds")
         current_time = time.strftime('%l:%M%p %z on %b %d, %Y')
-        print(f"Current time: {current_time}")
+        print(f"{current_time} | Processed {scan} and {seg} in {end - start} seconds")
+
         return seg, features
 
     def parse_output(self, seg, features):
