@@ -26,6 +26,7 @@ class Extractor:
         self.enable_other_img_types()
         self.get_pairs()
 
+        self.extract._set
 
     def load_config(self, config_path):
         with open(config_path, 'r') as file:
@@ -146,7 +147,7 @@ class Extractor:
         else:
             print("No data to save.")
 
-    def check_match(self, seg_dir, scan_dir):
+    def check_match(self, seg_dir, scan_dir, geometryTolerance=0.01):
         segs = os.listdir(seg_dir)
         segs = [_ for _ in segs if _.endswith(".nii.gz")]
         invalid = [] 
@@ -160,7 +161,7 @@ class Extractor:
             print(f"Checking {seg_path} and {scan_path}")
             scan, seg = sitk.ReadImage(scan_path), sitk.ReadImage(seg_path)
             try: 
-                radiomics.imageoperations.checkMask(scan, seg)
+                radiomics.imageoperations.checkMask(scan, seg, geometryTolerance=geometryTolerance)
             except Exception as e:
                 print(f"Error: {e}")
                 print(f"Segmentation {seg_path} does not match scan {scan_path}")
