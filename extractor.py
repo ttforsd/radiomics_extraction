@@ -11,11 +11,12 @@ import numpy as np
 
 
 class Extractor:
-    def __init__(self, workers = 3, batch_size = 1000):
+    def __init__(self, workers = 3, batch_size = 1000, geometryTolerance=1):
         self.extract = None  
         self.workers = workers
         self.batch_size = batch_size
         self.columns = None 
+        self.settings(geometryTolerance=geometryTolerance)
         self.load_extractor()
         self.df = None
         self.output_dir = "./results"
