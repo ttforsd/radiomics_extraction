@@ -16,7 +16,6 @@ class Extractor:
         self.workers = workers
         self.batch_size = batch_size
         self.columns = None 
-        self.settings(geometryTolerance=geometryTolerance)
         self.load_extractor()
         self.df = None
         self.output_dir = "./results"
@@ -65,6 +64,7 @@ class Extractor:
         self.extract = radiomics.featureextractor.RadiomicsFeatureExtractor()
         self.extract.disableAllImageTypes()
         self.extract.enableAllFeatures()
+        self.extract.settings(gemetryTolerance=geometryTolerance)
 
     def enable_wavelet(self):  
         if not self.extract:
