@@ -163,6 +163,7 @@ class Extractor:
                 radiomics.imageoperations.checkMask(scan, seg)
             except Exception as e:
                 print(f"Error: {e}")
+                print(f"Segmentation {seg_path} does not match scan {scan_path}")
                 invalid.append(seg_path)
         return invalid
                 
