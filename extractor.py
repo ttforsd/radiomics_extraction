@@ -156,7 +156,7 @@ class Extractor:
                 continue 
             seg_path = os.path.join(seg_dir, seg)
             print(f"Checking {seg_path} and {scan_path}")
-            radiomics.imageoperations.checkMask(seg_path, scan_path)
+            radiomics.imageoperations.checkMask(scan_path, seg_path)
 
 
 
