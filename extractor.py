@@ -26,7 +26,6 @@ class Extractor:
         self.enable_other_img_types()
         self.get_pairs()
 
-        self.extract._set
 
     def load_config(self, config_path):
         with open(config_path, 'r') as file:
