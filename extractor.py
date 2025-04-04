@@ -149,6 +149,7 @@ class Extractor:
     def check_match(self, seg_dir, scan_dir):
         segs = os.listdir(seg_dir)
         segs = [_ for _ in segs if _.endswith(".nii.gz")]
+        invalid = [] 
         for seg in segs: 
             scan = seg.replace(".nii.gz", "_0000.nii.gz")
             scan_path = os.path.join(scan_dir, scan)
@@ -158,7 +159,13 @@ class Extractor:
             seg_path = os.path.join(seg_dir, seg)
             print(f"Checking {seg_path} and {scan_path}")
             scan, seg = sitk.ReadImage(scan_path), sitk.ReadImage(seg_path)
-            radiomics.imageoperations.checkMask(scan, seg)
+            try: 
+                radiomics.imageoperations.checkMask(scan, seg)
+            except Exception as e:
+                print(f"Error: {e}")
+                invalid.append(seg_path)
+        return invalid
+                
 
 
 
