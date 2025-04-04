@@ -149,7 +149,7 @@ class Extractor:
         segs = os.listdir(seg_dir)
         segs = [_ for _ in segs if _.endswith(".nii.gz")]
         for seg in segs: 
-            scan = os.replace(seg, ".nii.gz", "_0000.nii.gz")
+            scan = seg.replace(".nii.gz", "_0000.nii.gz")
             scan_path = os.path.join(scan_dir, scan)
             if not os.path.exists(scan_path):
                 print(f"Scan file {scan_path} does not exist.")
