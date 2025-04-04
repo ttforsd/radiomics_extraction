@@ -65,7 +65,7 @@ class Extractor:
         self.extract = radiomics.featureextractor.RadiomicsFeatureExtractor()
         self.extract.disableAllImageTypes()
         self.extract.enableAllFeatures()
-        self.extract.settings(gemetryTolerance=geometryTolerance)
+        self.extract.settings(gemetryTolerance=self.geometryTolerance)
 
     def enable_wavelet(self):  
         if not self.extract:
