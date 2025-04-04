@@ -155,6 +155,7 @@ class Extractor:
                 print(f"Scan file {scan_path} does not exist.")
                 continue 
             seg_path = os.path.join(seg_dir, seg)
+            print(f"Checking {seg_path} and {scan_path}")
             radiomics.imageoperations.checkMask(seg_path, scan_path)
 
 
