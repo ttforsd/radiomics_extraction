@@ -158,7 +158,7 @@ class Extractor:
             seg_path = os.path.join(seg_dir, seg)
             print(f"Checking {seg_path} and {scan_path}")
             scan, seg = sitk.ReadImage(scan_path), sitk.ReadImage(seg_path)
-            radiomics.imageoperations.checkMask(scan_path, seg_path)
+            radiomics.imageoperations.checkMask(scan, seg)
 
 
 
