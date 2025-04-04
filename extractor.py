@@ -12,6 +12,7 @@ import numpy as np
 
 class Extractor:
     def __init__(self, workers = 3, batch_size = 1000, geometryTolerance=1):
+        self.geometryTolerance = geometryTolerance
         self.extract = None  
         self.workers = workers
         self.batch_size = batch_size
