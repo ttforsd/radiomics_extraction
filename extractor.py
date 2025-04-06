@@ -5,10 +5,10 @@ import pandas as pd
 from multiprocessing import Pool
 import time 
 import sys 
-from collections import defaultdict, OrderedDict
+from collections import defaultdict 
 import SimpleITK as sitk
 import numpy as np
-from numpy import array
+# from numpy import array
 
 
 
@@ -66,7 +66,7 @@ class Extractor:
 
     def load_extractor(self):
         self.extract = radiomics.featureextractor.RadiomicsFeatureExtractor()
-        self.extract.disableAllImageTypes()
+        # self.extract.disableAllImageTypes()
         self.extract.enableAllFeatures()
         self.extract.settings = {
             'geometryTolerance': self.geometryTolerance,}
