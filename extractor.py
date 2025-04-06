@@ -28,7 +28,7 @@ class Extractor:
         self.enable_wavelet()
         self.enable_other_img_types()
         self.get_pairs()
-        self.zero_ref = self.get_zero_features()
+        self.zero_ref = None
 
 
     def load_config(self, config_path):
@@ -108,6 +108,9 @@ class Extractor:
             features = self.extract.execute(scan, seg)
         except ValueError as e:
             print(f"ValueError: {e}")
+            if self.zero_ref is None:
+                print("Zero reference not found. Getting zero reference.")
+                self.zero_ref = self.get_zero_features()
             features = self.zero_ref
         end = time.time() 
         current_time = time.strftime('%l:%M%p %z on %b %d, %Y')
