@@ -5,9 +5,11 @@ import pandas as pd
 from multiprocessing import Pool
 import time 
 import sys 
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 import SimpleITK as sitk
 import numpy as np
+from numpy import array
+
 
 
 class Extractor:
@@ -26,6 +28,7 @@ class Extractor:
         self.enable_wavelet()
         self.enable_other_img_types()
         self.get_pairs()
+        self.zero_ref = self.get_zero_features()
 
 
     def load_config(self, config_path):
@@ -101,12 +104,23 @@ class Extractor:
         print(f"Extracting feactures from {scan} and {seg}")
         if not self.extract:
             self.load_extractor()
-        features = self.extract.execute(scan, seg)
+        try: 
+            features = self.extract.execute(scan, seg)
+        except ValueError as e:
+            print(f"ValueError: {e}")
+            features = self.zero_ref
         end = time.time() 
         current_time = time.strftime('%l:%M%p %z on %b %d, %Y')
         print(f"{current_time} | Processed {scan} and {seg} in {end - start} seconds")
 
         return seg, features
+
+    def get_zero_features(self): 
+        _, features = self.worker("ref.nii.gz", "ref.nii.gz")
+        for key in features: 
+            features[key] = 0 
+        return features
+
 
     def parse_output(self, seg, features):
         # if any feature len 1 np array, convert to float
