@@ -24,9 +24,9 @@ class Extractor:
         self.output_dir = "./results"
 
         self.load_config("data.yaml")
-        self.enable_LoG()
-        self.enable_wavelet()
-        self.enable_other_img_types()
+        # self.enable_LoG()
+        # self.enable_wavelet()
+        # self.enable_other_img_types()
         self.get_pairs()
         self.zero_ref = None
 
@@ -66,10 +66,13 @@ class Extractor:
 
     def load_extractor(self):
         self.extract = radiomics.featureextractor.RadiomicsFeatureExtractor()
+        self.extract.loadParams("param.yaml")
         # self.extract.disableAllImageTypes()
         self.extract.enableAllFeatures()
-        self.extract.settings = {
-            'geometryTolerance': self.geometryTolerance,}
+        # self.extract.settings = {
+        #     'geometryTolerance': self.geometryTolerance,}
+        # self.extract.settings["resamplePixelSpacing"] = [1, 1, 2]
+        print(self.extract.settings)
 
     def enable_wavelet(self):  
         if not self.extract:

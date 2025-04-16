@@ -178,4 +178,5 @@ data.yaml
 test.ipynb
 features.csv
 results/*
-
+param.yaml
+old_results/*
